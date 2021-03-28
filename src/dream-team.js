@@ -1,9 +1,18 @@
 const CustomError = require("../extensions/custom-error");
 
-module.exports =  function createDreamTeam(members) {
-  let arr=members.flat()
-  let teamName = []
-  for (let member of arr) {
-    if (typeof member == 'string') { teamName.push(member[0].match(/[A-Z]/g)) }
-     arr1.sort();
-  }return String(teamName.join(''))}
+module.exports = function createDreamTeam(members) {
+  if (!Array.isArray(members)) return false;
+  let teamName = [];
+  for (let member of members) {
+    if (typeof member == "string") {
+      for (let i = 0; i < member.length; ++i) {
+        if (member[i] != " ") {
+          teamName.push(member[i].toUpperCase());
+          break;
+        }
+      }
+    }
+  }
+  teamName.sort();
+  return teamName.flat().join("");
+};
